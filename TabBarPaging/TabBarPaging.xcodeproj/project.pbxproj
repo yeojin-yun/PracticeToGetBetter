@@ -17,6 +17,7 @@
 		0CBF5D4A289BA0A30092AC40 /* PageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBF5D49289BA0A30092AC40 /* PageCollectionViewCell.swift */; };
 		0CBF5D4C289BA3B50092AC40 /* TabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBF5D4B289BA3B40092AC40 /* TabView.swift */; };
 		0CBF5D4E289BAF3C0092AC40 /* TabCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBF5D4D289BAF3C0092AC40 /* TabCollectionViewCell.swift */; };
+		0CBF5D50289D01AD0092AC40 /* ViewPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBF5D4F289D01AD0092AC40 /* ViewPager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		0CBF5D49289BA0A30092AC40 /* PageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageCollectionViewCell.swift; sourceTree = "<group>"; };
 		0CBF5D4B289BA3B40092AC40 /* TabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabView.swift; sourceTree = "<group>"; };
 		0CBF5D4D289BAF3C0092AC40 /* TabCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCollectionViewCell.swift; sourceTree = "<group>"; };
+		0CBF5D4F289D01AD0092AC40 /* ViewPager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewPager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +69,7 @@
 				0CBF5D33289B98BB0092AC40 /* AppDelegate.swift */,
 				0CBF5D35289B98BB0092AC40 /* SceneDelegate.swift */,
 				0CBF5D37289B98BB0092AC40 /* ViewController.swift */,
+				0CBF5D4F289D01AD0092AC40 /* ViewPager.swift */,
 				0CBF5D47289B99610092AC40 /* PageView.swift */,
 				0CBF5D4B289BA3B40092AC40 /* TabView.swift */,
 				0CBF5D4D289BAF3C0092AC40 /* TabCollectionViewCell.swift */,
@@ -154,6 +157,7 @@
 				0CBF5D48289B99610092AC40 /* PageView.swift in Sources */,
 				0CBF5D4E289BAF3C0092AC40 /* TabCollectionViewCell.swift in Sources */,
 				0CBF5D4A289BA0A30092AC40 /* PageCollectionViewCell.swift in Sources */,
+				0CBF5D50289D01AD0092AC40 /* ViewPager.swift in Sources */,
 				0CBF5D34289B98BB0092AC40 /* AppDelegate.swift in Sources */,
 				0CBF5D4C289BA3B50092AC40 /* TabView.swift in Sources */,
 				0CBF5D36289B98BB0092AC40 /* SceneDelegate.swift in Sources */,

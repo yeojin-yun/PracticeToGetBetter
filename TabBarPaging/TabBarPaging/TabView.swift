@@ -11,7 +11,7 @@ protocol TabViewDelegate: AnyObject {
     func didMoveToTab(at index: Int)
 }
 
-class TabView: UIView, UICollectionViewDelegate {
+class TabView: UIView {
 
     enum SizeConfiguration {
         case fillEqually(height: CGFloat, spacing: CGFloat = 0)
@@ -19,15 +19,15 @@ class TabView: UIView, UICollectionViewDelegate {
         
         var height: CGFloat {
             switch self {
-            case .fillEqually(height, _):
+            case let .fillEqually(height, _):
                 return height
-            case .fixed(_, height, _):
+            case let .fixed(_, height, _):
                 return height
             }
         }
     }
 
-    init(sizeConfiguration: SizeConfiguration, tabs: [TabItemProtocol]) {
+    init(sizeConfiguration: SizeConfiguration, tabs: [TabItemProtocol] = []) {
         self.sizeConfiguration = sizeConfiguration
         self.tabs = tabs
         super.init(frame: .zero)
@@ -42,8 +42,9 @@ class TabView: UIView, UICollectionViewDelegate {
     public let sizeConfiguration: SizeConfiguration
     private var currentlySelectedIndex: Int = 0
     
-    public var tabs: [TabItemProtocol] = [] {
+    public var tabs: [TabItemProtocol] {
         didSet {
+            print(tabs)
             self.collectionView.reloadData()
             self.tabs[currentlySelectedIndex].onSelected()
         }
@@ -72,15 +73,23 @@ class TabView: UIView, UICollectionViewDelegate {
             collectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
         ])
     }
+    
+    func moveToTap(at index: Int) {
+        let indexPath = IndexPath(item: index, section: 0)
+        self.collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        self.currentlySelectedIndex = index
+    }
 }
 
 extension TabView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        <#code#>
+        return tabs.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        <#code#>
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TabCollectionViewCell.identifier, for: indexPath) as! TabCollectionViewCell
+        cell.view = tabs[indexPath.item]
+        return cell
     }
 }
 
@@ -88,13 +97,27 @@ extension TabView: UICollectionViewDataSource {
 extension TabView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch sizeConfiguration {
-        case .fillEqually(height, spacing):
-            
+        case let .fillEqually(height, spacing):
+            let totalWidth = self.frame.width
+            let widthPerItem = (totalWidth - (spacing * CGFloat((self.tabs.count + 1)))) / CGFloat(self.tabs.count)
+            return CGSize(width: widthPerItem, height: height)
+        case let .fixed(width: width, height: height, spacing: spacing):
+            return CGSize(width: width - (spacing * 2), height: height)
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        <#code#>
+        switch sizeConfiguration {
+        case let .fillEqually(_, spacing: spacing), let .fixed(_, _, spacing):
+            return spacing
+            
+        }
     }
 }
 
+extension TabView: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.moveToTap(at: indexPath.item)
+        self.delegate?.didMoveToTab(at: indexPath.item)
+    }
+}

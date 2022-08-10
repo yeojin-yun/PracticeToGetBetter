@@ -13,7 +13,7 @@ protocol PageViewDelegate: AnyObject {
 
 class PageView: UIView {
 
-    init(pages: [UIView]) {
+    init(pages: [UIView] = []) {
         self.pages = pages
         super.init(frame: .zero)
         setUI()
@@ -37,7 +37,7 @@ class PageView: UIView {
         return collectionView
     }()
 
-    public var pages: [UIView] = [UIView]() {
+    public var pages: [UIView] {
         didSet {
             self.collectionView.reloadData()
         }
